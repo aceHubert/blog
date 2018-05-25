@@ -42,7 +42,7 @@ anchorjs: true                          # if you want to customize anchor. check
 
 
 # Disqus settings
-disqus_username: acehubert
+disqus_username: blog-acehubert-com
 
 # Duoshuo settings
 # duoshuo_username: kaijun
@@ -54,7 +54,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 # Baidu Analytics
 # ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 # Google Analytics
-ga_track_id: 'UA-XXXXXXXX-X'          # Format: UA-xxxxxx-xx
+ga_track_id: 'UA-119883810-1'          # Format: UA-xxxxxx-xx
 ga_domain: blog.acehubert.com
 
 
@@ -96,7 +96,7 @@ friends: [
 
 # Directory
 source_dir: source
-public_dir: public
+public_dir: dist
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
@@ -168,5 +168,5 @@ sitemap:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/acehubert/blog.git
+  repository: https://github.com/aceHubert/blog.git
   branch: gh-pages

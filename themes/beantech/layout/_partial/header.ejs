@@ -41,7 +41,7 @@
                         </span>
                     </div>
                 <% } else { %>
-                    <div class="site-heading">
+                    <div class="site-heading <%= is_home() ? 'home' : ''%>">
                         <h1><%= page.title || config.title %></h1>
                         <!--<hr class="small">-->
                         <span class="subheading"><%= page.description || config.subtitle || "" %></span>
