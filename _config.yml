@@ -21,8 +21,8 @@ permalink_defaults:
 # Site settings
 SEOTitle: AceHubert | Blog
 email: yi.xiang@live.cn
-description: ""
-keyword: ""
+description: "hubert's blogs "
+keyword: "acehubert, blog"
 header-img: img/header_img/Index.jpg
 signature: true #show signature
 signature-img: img/signature/Sign-white.png 
@@ -35,6 +35,7 @@ signature-img: img/signature/Sign-white.png
 github_username:    aceHubert
 # twitter_username:   
 facebook_username:  acehubert007
+instagram_username: acehubert
 #linkedin_username:  
 
 # Build settings

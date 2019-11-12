@@ -1,2 +1,1 @@
-# blog
-my blog
+# hubert's blog
