@@ -1,7 +1,7 @@
 ---
 title: "软件版本中的Alpha,Beta,RC,Trial是什么意思？"
 catalog: true
-date: 2019-11-16 10:51:24
+date: 2019-11-12 10:51:24
 subtitle: ""
 header-img: "version_bg.png"
 tags:
@@ -12,11 +12,10 @@ tags:
 - code
 - service
 catagories:
-- Tech
+- Code
 ---
-> 本文转载自[链接](https://blog.csdn.net/linxinzheng/article/details/2201043)
 
-# 版本号
+## 版本号
 ---
 `V（Version）`：即版本，通常用数字表示版本号。(如:EVEREST　Ultimate　v4.20.1188　Beta　)  
 `Build`：用数字或日期标示版本号的一种方式。(如:VeryCD　eMule　v0.48a　Build　071112)  
@@ -49,7 +48,7 @@ catagories:
 `Multilanguage`：多语言版  
 `UTF8`：Unicode　Transformation　Format　8　bit，对现有的中文系统不是好的解决方案。
 
-### 其他版本
+## 其他版本
 `Enhance`：增强版或者加强版　属于正式版1  
 `Free`：自由版  
 `Release`：发行版　有时间限制  
@@ -66,3 +65,7 @@ catagories:
 `Express`：简易版  
 `Deluxe`：豪华版  
 `Regged`：已注册版  
+
+>
+> 本文转载自[链接](https://blog.csdn.net/linxinzheng/article/details/2201043)
+>

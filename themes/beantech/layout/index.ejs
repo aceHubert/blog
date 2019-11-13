@@ -18,20 +18,20 @@ layout: page
         </div>
     </a>
     <% if (config.home_posts_tag){%>
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by <%- post.author || config.author %> on
-            <%= post.date.format(config.date_format) %>
-        </p>
-        <div class="tags">
-            <% post.tags.forEach(function(tag){ %>
-              <a href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
-            <% }) %>
-        </div>
+    <p class="post-meta" style="margin: 10px 0;">
+        <span><%= post.date.format(config.date_format) %></span>
+        <span><%- post.author || config.author %></span>
+    </p>
+    <div class="tags">
+        <% post.tags.forEach(function(tag){ %>
+        <a href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
+        <% }) %>
+    </div>
     <%} else {%>
-        <p class="post-meta">
-            Posted by <%- post.author || config.author %> on
-            <%= post.date.format(config.date_format) %>
-        </p>
+    <p class="post-meta">
+        Posted by <%- post.author || config.author %> on
+        <%= post.date.format(config.date_format) %>
+    </p>
     <%}%>
 
 </div>
@@ -39,18 +39,17 @@ layout: page
 <% }); %>
 
 
-<!-- Pager -->
+    <!-- Pager -->
 
-<ul class="pager">
-    <% if (page.prev){ %>
+    <ul class="pager">
+        <% if (page.prev){ %>
         <li class="previous">
             <a href="<%- config.root %><%- page.prev_link %>">&larr; Newer Posts</a>
         </li>
-    <% } %>
-    <% if (page.next){ %>
+        <% } %>
+        <% if (page.next){ %>
         <li class="next">
             <a href="<%- config.root %><%- page.next_link %>">Older Posts &rarr;</a>
         </li>
-    <% } %>
-</ul>
-
+        <% } %>
+    </ul>

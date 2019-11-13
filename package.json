@@ -2,8 +2,13 @@
   "name": "acehubert-blog",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "generate": "hexo clean && hexo generate",
+    "serve": "hexo serve",
+    "deploy": "yarn generate && hexo deploy"
+  },
   "hexo": {
-    "version": "3.7.1"
+    "version": "3.9.0"
   },
   "dependencies": {
     "hexo": "^3.2.0",
