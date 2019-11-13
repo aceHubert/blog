@@ -5,14 +5,13 @@ date: 2019-11-12 10:51:24
 subtitle: ""
 header-img: "version_bg.png"
 tags:
-- Tech
+- code
 - test
 - build
 - language
-- code
 - service
 catagories:
-- Code
+- code
 ---
 
 ## 版本号
