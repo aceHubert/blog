@@ -5,3 +5,23 @@
 # https://github.com/chriskempson/tomorrow-theme
 # night yilia - https://github.com/litten/hexo-theme-yilia
 highlight_theme: night
+
+# category show count
+show_count: true
+
+menu:
+  archives: /archive
+  aboutme: /about
+
+# home page title, it will be the title in root config if it has not set
+index-title: Index Title 
+
+# post bottom widgets
+post-widgets:
+-  featured-tags  # root config have to set `featured-tags` as true
+-  friends # root config have to set `friend` values
+
+# page bottom widgets if root config set sidebar false
+page-widgets:
+-  featured-tags # same as post bottom widgets
+-  friends

@@ -36,14 +36,36 @@
   width: 80%;
   display: block;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .sidebar-container .short-about p {
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+}
+.sidebar-container .short-about .title {
+  font-size: 1.35em;
 }
 .sidebar-container .short-about .list-inline > li {
-  padding-left: 0px;
+  text-align: center;
+  position: relative;
+}
+
+.sidebar-container .short-about .list-inline > li:not(:first-child)::before {
+  content: " ";
+  position: absolute;
+  top: 25px;
+  left: 0;
+  bottom: 25px;
+  width: 1px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.1);
+  transform-origin: 0 0;
+  transform: scalex(0.5);
+}
+
+.sidebar-container .short-about .list-inline > li a:hover,
+.sidebar-container .short-about .list-inline > li a:active {
+  text-decoration: none;
 }
 
 body {
@@ -229,13 +251,17 @@ pre code {
   margin-top: 20px;
 }
 .post-container .tags a {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0;
+  color: #404040;
+  background-color: transparent;  
+}
+.post-container .tags a::before{
+  content: "#";
 }
 .post-container .tags a:hover,
 .post-container .tags a:active {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
+  color: #0085a1;
+  background-color: transparent;
 }
 
 @media only screen and (max-width: 767px) {
@@ -357,7 +383,7 @@ pre code {
     background: none;
   }
 }
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 768px) {
   .navbar-custom {
     -webkit-transition: background-color 0.3s;
     -moz-transition: background-color 0.3s;
@@ -374,7 +400,7 @@ pre code {
   .navbar-custom.is-fixed {
     /* when the user scrolls down, we hide the header right above the viewport */
     position: fixed;
-    top: -61px;
+    /* top: -61px; */
     background-color: rgba(255, 255, 255, 0.9);
     border-bottom: 1px solid #f2f2f2;
     -webkit-transition: -webkit-transform 0.3s;
@@ -397,11 +423,11 @@ pre code {
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
-    -webkit-transform: translate3d(0, 100%, 0);
+    /* -webkit-transform: translate3d(0, 100%, 0);
     -moz-transform: translate3d(0, 100%, 0);
     -ms-transform: translate3d(0, 100%, 0);
     -o-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0); */
   }
 }
 .intro-header {
@@ -412,7 +438,7 @@ pre code {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  margin-bottom: 0px;
+  margin-bottom: 15px;
   /* modify by Yu-Hsuan Yen */
 }
 @media only screen and (min-width: 768px) {
@@ -426,6 +452,16 @@ pre code {
 .intro-header .page-heading {
   padding: 85px 0 55px;
   color: white;
+}
+
+.intro-header .site-heading.home {
+  color: #333;
+}
+
+.intro-header--no-img .site-heading,
+.intro-header--no-img .post-heading,
+.intro-header--no-img .page-heading {
+  padding: 75px 0 30px !important;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
@@ -504,7 +540,11 @@ pre code {
 .intro-header .post-heading .meta {
   font-family: "Lora", "Times New Roman", serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 14px;
+  color: #eee;
+}
+.intro-header .post-heading .meta span:not(:first-child) {
+  margin-left: 10px;
 }
 .intro-header .post-heading .meta a {
   color: white;
@@ -528,9 +568,27 @@ pre code {
     font-size: 30px;
   }
   .intro-header .post-heading .meta {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
+.intro-header .category-link {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 999em;
+  padding: 0 10px;
+  color: #fff;
+  line-height: 24px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 0 1px 6px;
+}
+
+.intro-header .category-link:hover,
+.intro-header .category-link:active {
+  background-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
 .post-preview > a {
   color: #404040;
 }
@@ -822,7 +880,6 @@ body {
   line-height: 28px;
   margin: 0 2px;
   margin-bottom: 8px;
-  background-color: rgba(0, 0, 0, 0.3) !important;
 }
 #tag_cloud a:hover,
 #tag_cloud .tag:hover,
@@ -906,6 +963,17 @@ body {
     font-size: 14px;
   }
 }
+.archive-list {
+  padding-left: 15px;
+}
+.archive-list__item {
+  margin-left: 0;
+  list-style-type: none;
+}
+.archive-list__item .post-meta {
+  position: relative !important;
+}
+
 /* Tags support End*/
 /* Hux make all img responsible in post-container */
 .post-container img {

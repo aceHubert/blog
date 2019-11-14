@@ -6,8 +6,10 @@
     col-xs-12
     sidebar-container
 ">
-    <% theme.widgets.forEach(function(widget){ %>
-        <hr>
+    <% theme.widgets.forEach(function(widget, index){ %>
+        <% if(index != 0) { %>
+            <hr>
+            <%}%>
         <%- partial('_widget/' + widget) %>       
     <% }) %>
 </div>

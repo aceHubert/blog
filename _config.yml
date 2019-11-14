@@ -3,15 +3,15 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hubert's Blog
-subtitle: For fun, For life
+title: Hubert's blog
+subtitle: for Fun for Life
 author: Hubert
-language: zh-CN
+language: en-US
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.acehubert.com       # Note: don't forget to modify the CNAME file to your url
+url: http://blog.acehubert.com # Note: don't forget to modify the CNAME file to your url
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -19,28 +19,26 @@ permalink_defaults:
 #Custom Setting Start
 
 # Site settings
-SEOTitle: AceHubert | Blog
+SEOTitle: Hi, this's Hubert | Blog
 email: yi.xiang@live.cn
-description: "hubert's blogs "
+description: "hubert's blogs"
 keyword: "acehubert, blog"
 header-img: img/header_img/Index.jpg
 signature: true #show signature
-signature-img: img/signature/Sign-white.png 
-
+signature-img: img/signature/Sign-white.png
 
 # SNS settings
 # RSS: false
-# weibo_username:     
-# zhihu_username:     
-github_username:    aceHubert
-# twitter_username:   
-facebook_username:  acehubert007
+# weibo_username:
+# zhihu_username:
+github_username: aceHubert
+# twitter_username:
+facebook_username: acehubert007
 instagram_username: acehubert
-#linkedin_username:  
+#linkedin_username:
 
 # Build settings
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
+anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 
 # Disqus settings
 disqus_username: blog-acehubert-com
@@ -48,54 +46,44 @@ disqus_username: blog-acehubert-com
 # Duoshuo settings
 # duoshuo_username: kaijun
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-
+duoshuo_share: true # set to false if you want to use Comment without Sharing
 
 # Analytics settings
 # Baidu Analytics
 # ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 # Google Analytics
-ga_track_id: 'UA-119883810-1'          # Format: UA-xxxxxx-xx
+ga_track_id: "UA-119883810-1" # Format: UA-xxxxxx-xx
 ga_domain: blog.acehubert.com
 
-
 # Sidebar settings
-sidebar: true                       # whether or not using Sidebar.
-sidebar-in-post: false              # display in bottom of post
-sidebar-about-description: "Hi, this is Hubert"
-sidebar-avatar: img/avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar: true # whether or not using Sidebar.
+sidebar-about-title: "Hubert"
+sidebar-about-description: "for Fun for Life"
+sidebar-avatar: img/avatar.jpg # use absolute URL, seeing it's used in both `/` and `/about/`
 widgets:
-- category
-- featured-tags
-- short-about
-# - recent-posts
-- friends-blog
+  - category
+  # - featured-tags
+  - short-about
+  # - recent-posts
+  - friends-blog
 # - archive
-
 
 # widget behavior
 ## Archive
-archive_type: 'monthly'
+archive_type: "monthly"
 show_count: true
 
-
 ## Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
+featured-tags: true # whether or not using Feature-Tags
+featured-condition-size: 1 # A tag will be featured if the size of it is more than this condition value
 
 ## Friends
 friends: [
-    # {
-    #     title: "Bean Tech",
-    #     href: "http://beantech.org"
-    # }
-]
-
+  # { title: "Bean Tech", href: "http://beantech.org" }
+  { title: "Hubert's", href: "http://www.acehubert.com" }
+  ]
 
 #Custom Setting End
-
-
 
 # Directory
 source_dir: source
@@ -146,7 +134,7 @@ archive_generator:
   yearly: true
   monthly: true
   daily: false
-  
+
 # Markdown-it config
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
 markdown:
@@ -156,12 +144,20 @@ markdown:
     breaks: true
     linkify: true
     typographer: true
-    quotes: '“”‘’'
-  
+    quotes: "“”‘’"
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: beantech
+theme_config:
+  index-title: Hi, this's Hubert!
+  post-widgets:
+    # -  featured-tags
+    # -  friends
+  page-widgets:
+    # -  featured-tags
+    # -  friends
 
 #sitemap
 sitemap:

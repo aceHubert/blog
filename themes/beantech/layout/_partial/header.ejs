@@ -5,7 +5,7 @@
         <% if (is_home()) { %>
             background-image: url('<%= config.root + config["header-img"] %>') 
             /*config*/
-        <%} else if (is_post()){%>
+        <%} else if (is_post() && page["header-img"]){%>
             background-image: url('<%= page["header-img"] %>')
             /*post*/
         <%} else {%>
@@ -19,8 +19,7 @@
     }
     <%}%>
 </style>
-
-<header class="intro-header" >
+<header class="intro-header <%= is_post() && !page['header-img'] ? 'intro-header--no-img' : ''%>" >
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -28,21 +27,19 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <% if (is_post()) { %>
                     <div class="post-heading">
-                        <div class="tags">
-                            <% page.tags.forEach(function(tag){ %>
-                              <a class="tag" href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
-                            <% }) %>
-                        </div>
+                        <% page.categories.forEach(function(category){ %>
+                            <a class="category-link" href="<%= config.root %>categories/#<%= category.name %>" title="<%= category.name %>"><%= category.name %></a>
+                        <% }) %>
                         <h1><%= page.title %></h1>
                         <h2 class="subheading"><%= page.subtitle || "" %></h2>
-                        <span class="meta">
-                            Posted by <%- page.author || config.author %> on
-                            <%= page.date.format(config.date_format) %>
-                        </span>
+                        <p class="meta">
+                            <span><%= page.date.format(config.date_format) %></span>
+                            <span><%- page.author || config.author %></span>                            
+                        </p>
                     </div>
                 <% } else { %>
                     <div class="site-heading <%= is_home() ? 'home' : ''%>">
-                        <h1><%= page.title || config.title %></h1>
+                        <h1><%= is_home() ? theme['index-title'] || page.title : page.title || config.title %></h1>
                         <!--<hr class="small">-->
                         <span class="subheading"><%= page.description || config.subtitle || "" %></span>
                     </div>

@@ -1,7 +1,14 @@
 <!-- Categories -->
 <% if (site.categories.length){ %>
-    <h5><%= __('categories') %></h3>
-    <div class="widget">
-      <%- list_categories({show_count: theme.show_count}) %>
-    </div>
-<% } %>
+<h5><%= __('categories') %></h3>
+  <div class="widget">
+    <ul style="padding-left: 20px;">
+      <% site.categories.forEach(function(category){ %>
+      <li>
+        <a class="category-link" href="<%= config.root %>categories/#<%= category.name %>"
+          title="<%= category.name %>"><%= category.name %>(<%= category.length %>)</a>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
