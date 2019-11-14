@@ -21,15 +21,15 @@ layout: page
 </div>
 </a>
 <% if (config.home_posts_tag){%>
-<p class="post-meta" style="margin:0;">
-    <span><%= post.date.format(config.date_format) %></span>
-    <span><%- post.author || config.author %></span>
-</p>
 <div class="tags">
     <% post.tags.forEach(function(tag){ %>
     <a href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
     <% }) %>
 </div>
+<p class="post-meta">
+    <span><%= post.date.format(config.date_format) %></span>
+    <span><%- post.author || config.author %></span>
+</p>
 <%} else {%>
 <p class="post-meta">
     <span><%= post.date.format(config.date_format) %></span>
