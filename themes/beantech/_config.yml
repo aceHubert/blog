@@ -15,6 +15,7 @@ menu:
 
 # home page title, it will be the title in root config if it has not set
 index-title: Index Title 
+index-title-color: ""
 
 # post bottom widgets
 post-widgets:

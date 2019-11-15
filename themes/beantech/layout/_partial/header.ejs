@@ -13,6 +13,14 @@
             /*page*/
         <%} %>
     }
+     header.intro-header .site-heading,
+     header.intro-header .post-heading {
+          <% if (is_home() && theme['index-title-color']) { %>
+            color: <%= theme['index-title-color'] %>;
+        <%} else if(page['title-color']) {%>
+            color: <%= page['title-color'] %>;
+            <%} %>
+    }
     <% if (config.signature) {%>
     #signature{
         background-image: url('<%= config.root + config["signature-img"] %>');
@@ -39,7 +47,7 @@
                     </div>
                 <% } else { %>
                     <div class="site-heading <%= is_home() ? 'home' : ''%>">
-                        <h1><%= is_home() ? theme['index-title'] || page.title : page.title || config.title %></h1>
+                        <h1><%= (is_home() && theme['index-title'] ? theme['index-title'] : page.title) || config.title %></h1>
                         <!--<hr class="small">-->
                         <span class="subheading"><%= page.description || config.subtitle || "" %></span>
                     </div>

@@ -453,11 +453,6 @@ pre code {
   padding: 85px 0 55px;
   color: white;
 }
-
-.intro-header .site-heading.home {
-  color: #333;
-}
-
 .intro-header--no-img .site-heading,
 .intro-header--no-img .post-heading,
 .intro-header--no-img .page-heading {
@@ -541,7 +536,7 @@ pre code {
   font-family: "Lora", "Times New Roman", serif;
   font-weight: 300;
   font-size: 14px;
-  color: #eee;
+  opacity: 0.8;
 }
 .intro-header .post-heading .meta span:not(:first-child) {
   margin-left: 10px;
@@ -939,14 +934,12 @@ body {
 }
 .one-tag-list .post-preview > a .post-subtitle {
   font-size: 12px;
+  opacity: 0.6;
 }
-.one-tag-list .post-preview > .post-meta {
-  position: absolute;
-  right: 5px;
-  bottom: 0px;
+.one-tag-list .post-preview > .post-meta { 
   margin: 0px;
   font-size: 12px;
-  line-height: 12px;
+  line-height: 1;
 }
 @media only screen and (min-width: 768px) {
   .one-tag-list .post-preview {
@@ -961,6 +954,9 @@ body {
   }
   .one-tag-list .post-preview .post-meta {
     font-size: 14px;
+    position: absolute;
+    right: 5px;
+    bottom: 0px;
   }
 }
 .archive-list {

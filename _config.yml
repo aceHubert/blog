@@ -152,6 +152,7 @@ markdown:
 theme: beantech
 theme_config:
   index-title: Hi, this's Hubert!
+  index-title-color: "#333"
   post-widgets:
     # -  featured-tags
     # -  friends

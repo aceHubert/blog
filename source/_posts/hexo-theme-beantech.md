@@ -1,14 +1,17 @@
 ---
 title: "[Hexo] Theme BeanTech"
+title-color: "#009aba"
 catalog: true
 date: 2017-03-18 10:51:24
 subtitle: "This is hexo theme Demo."
 header-img: "Demo.png"
+display: true # 不显示在首页
 tags:
 - Hexo
 - Blog
-catagories:
-- Hexo
+- Demo
+categories:
+- Demo
 ---
 > Ported Theme of [Hux Blog](https://github.com/Huxpro/huxpro.github.io), Thank [Huxpro](https://github.com/Huxpro) for designing such a flawless theme.
 > 

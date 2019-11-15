@@ -1,16 +1,16 @@
 ---
 title: "软件版本中的Alpha,Beta,RC,Trial是什么意思？"
-catalog: true
+catalog: false
 date: 2019-11-12 10:51:24
 subtitle: ""
 header-img: "version_bg.png"
 tags:
-- code
+- coding
 - nodejs
 - javascript
 - build
 categories:
-- code
+- coding
 ---
 
 ## 版本号

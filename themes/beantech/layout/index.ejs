@@ -3,7 +3,7 @@ layout: page
 ---
 <!-- Main Content -->
 
-<% page.posts.each(function(post,index){ %>
+<% page.posts.filter(post=>post.display != false).each(function(post,index){ %>
 <% if(index != 0) { %>
 <hr>
 <%}%>
