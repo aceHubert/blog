@@ -11,13 +11,15 @@ show_count: true
 
 menu:
   archives: /archive
+  categories: /categories
+  tags: /tags
   aboutme: /about
 
 # home page title, it will be the title in root config if it has not set
 index-title: Index Title 
 index-title-color: ""
 
-# post bottom widgets
+# post bottom widgets if root config set sidebar false
 post-widgets:
 -  featured-tags  # root config have to set `featured-tags` as true
 -  friends # root config have to set `friend` values

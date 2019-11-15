@@ -78,9 +78,9 @@ featured-tags: true # whether or not using Feature-Tags
 featured-condition-size: 1 # A tag will be featured if the size of it is more than this condition value
 
 ## Friends
-friends: [
-  # { title: "Bean Tech", href: "http://beantech.org" }
-  { title: "Hubert's", href: "http://www.acehubert.com" }
+friends: [  
+  { title: "Hubert's Blog", href: "http://blog.acehubert.com" },
+  { title: "Bean Tech", href: "http://beantech.org" }
   ]
 
 #Custom Setting End
@@ -151,12 +151,18 @@ markdown:
 ## Themes: https://hexo.io/themes/
 theme: beantech
 theme_config:
-  index-title: Hi, this's Hubert!
-  index-title-color: "#333"
-  post-widgets:
+  index-title: Hi, this's Hubert!  # index page title
+  index-title-color: "#333" # index page title color  
+  show_count: true # category show count
+  menu:
+    archives: /archive
+    # categories: /categories
+    # tags: /tags
+    aboutme: /about
+  post-widgets: # post bottom widgets display when root config set sidebar false
     # -  featured-tags
     # -  friends
-  page-widgets:
+  page-widgets: # page bottom widgets display when root config set sidebar false
     # -  featured-tags
     # -  friends
 
