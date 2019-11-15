@@ -22,7 +22,7 @@ hexo serve # run hexo in local environment
 hexo deploy # hexo will push the static files automatically into the specific branch(gh-pages) of your repo!
 ```
 
-#### theme config
+#### theme config in root
 
 ```yml
 theme: beantech
@@ -42,4 +42,11 @@ theme_config:
     # -  featured-tags
     # -  friends
 
+```
+
+#### post/page config in header
+> index-title-color is in the theme_config 
+```yml
+title-color: "#333" # title color
+display: false # show it in the index page
 ```
