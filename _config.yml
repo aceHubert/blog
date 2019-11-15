@@ -151,8 +151,14 @@ markdown:
 ## Themes: https://hexo.io/themes/
 theme: beantech
 theme_config:
-  index-title: Hi, this's Hubert!
-  index-title-color: "#333"
+  index-title: Hi, this's Hubert!  # index page title
+  index-title-color: "#333" # index page title color  
+  show_count: true # category show count
+  menu:
+    archives: /archive
+    # categories: /categories
+    # tags: /tags
+    aboutme: /about
   post-widgets:
     # -  featured-tags
     # -  friends

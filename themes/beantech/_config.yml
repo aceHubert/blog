@@ -11,6 +11,8 @@ show_count: true
 
 menu:
   archives: /archive
+  # categories: /categories
+  # tags: /tags
   aboutme: /about
 
 # home page title, it will be the title in root config if it has not set

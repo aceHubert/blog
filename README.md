@@ -2,8 +2,17 @@
 
 > Ported Theme of [Hux Blog](https://github.com/Huxpro/huxpro.github.io), Thank [Huxpro](https://github.com/Huxpro) for designing such a flawless theme.
 > 
-> This BeanTech theme created by [YuHsuan](http://beantech.org) modified from the original Porter [Kaijun](http://kaijun.rocks/hexo-theme-huxblog/)
+> updated from BeanTech theme created by [YuHsuan](http://beantech.org)
 
+
+<br/>
+
+#### Some local command:
+```bash
+yarn generate # hexo clean && hexo generate
+yarn serve  # hexo serve
+yarn deploy # yarn generate && hexo deploy
+```
 
 <br/>
 
