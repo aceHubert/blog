@@ -1,9 +1,11 @@
 ---
-title: "软件版本中的Alpha,Beta,RC,Trial是什么意思？"
-catalog: false
+title: '软件版本中的Alpha,Beta,RC,Trial是什么意思？'
 date: 2019-11-12 10:51:24
-subtitle: ""
-header-img: "version_bg.png"
+subtitle: ''
+header-img: 'version_bg.png'
+title-color: '#fff'
+display: true 
+catalog: false
 tags:
 - coding
 - nodejs
