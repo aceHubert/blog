@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hubert&#39;s blogs">
+    <meta name="keyword" content="acehubert, blog">
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Typescript中强大的类型别名 - Hi, this&#39;s Hubert | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://blog.acehubert.com/2019/12/03/typescript-type-alias/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+     header.intro-header .site-heading,
+     header.intro-header .post-heading {
+          
+            color: #B80066;
+            
+    }
+    
+    #signature{
+        background-image: url('/img/signature/Sign-white.png');
+    }
+    
+</style>
+<header class="intro-header " >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        
+                            <a class="category-link" href="/categories/#coding" title="coding">coding</a>
+                        
+                            <a class="category-link" href="/categories/#typescript" title="typescript">typescript</a>
+                        
+                        <h1>Typescript中强大的类型别名</h1>
+                        <h2 class="subheading"></h2>
+                        <p class="meta">
+                            <span>2019-12-03</span>
+                            <span>Hubert</span>                            
+                        </p>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hubert&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        <li>
+                            <a href="/archive">archives</a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">aboutme</a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>TypeScript 强大的类型别名<br>TS 有个非常好用的功能就是类型别名。</p>
+<p>类型别名会给一个类型起个新名字。类型别名有时和接口很像，但是可以作用于原始值，联合类型，元组以及其它任何你需要手写的类型。</p>
+<h3 id="一些关键字"><a href="#一些关键字" class="headerlink" title="一些关键字"></a>一些关键字</h3><hr>
+<p>使用类型别名可以实现很多复杂的类型，很多复杂的类型别名都需要借助关键字，我们先来了解一下几个常用的关键字：<br><br></p>
+<h4 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h4><p><code>extends</code> 可以用来继承一个类，也可以用来继承一个 <code>interface</code>，但还可以用来判断有条件类型：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T <span class="keyword">extends</span> U ? X : Y;</span><br></pre></td></tr></table></figure></p>
+<p>上面的类型意思是，若 <code>T</code> 能够赋值给 <code>U</code>，那么类型是 <code>X</code>，否则为 <code>Y</code>。 </p>
+<p>原理是令 <code>T</code> 和 <code>U</code> 分别为 <code>T</code> 和 <code>U</code> 的实例，并将所有类型参数替换为 <code>any</code>，如果 <code>T</code> 能赋值给 <code>U</code>，则将有条件的类型解析成 <code>X</code>，否则为 <code>Y</code>。</p>
+<p>上面的官方解释有点绕，下面举个栗子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Words = <span class="string">'a'</span>|<span class="string">'b'</span>|<span class="string">"c"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> W&lt;T&gt; = T <span class="keyword">extends</span> Words ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> WA = W&lt;<span class="string">'a'</span>&gt;; <span class="comment">// -&gt; true</span></span><br><span class="line"><span class="keyword">type</span> WD = W&lt;<span class="string">'d'</span>&gt;; <span class="comment">// -&gt; false</span></span><br></pre></td></tr></table></figure></p>
+<p><code>a</code> 可以赋值给 <code>Words</code> 类型，所以 <code>WA</code> 为 <code>true</code>，而 <code>d</code> 不能赋值给 <code>Words</code> 类型，所以 <code>WD</code> 为 <code>false</code>。</p>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><p>在 JS 中 <code>typeof</code> 可以判断一个变量的基础数据类型，在 TS 中，它还有一个作用，就是获取一个变量的声明类型，如果不存在，则获取该类型的推论类型。</p>
+<p>举两个栗子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  location?: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> jack: Person = &#123; name: <span class="string">'jack'</span>, age: <span class="number">100</span> &#125;;</span><br><span class="line"><span class="keyword">type</span> Jack = <span class="keyword">typeof</span> jack; <span class="comment">// -&gt; Person</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x: <span class="built_in">number</span></span>): <span class="title">Array</span>&lt;<span class="title">number</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> F = <span class="keyword">typeof</span> foo; <span class="comment">// -&gt; (x: number) =&gt; number[]</span></span><br></pre></td></tr></table></figure></p>
+<p><code>Jack</code> 这个类型别名实际上就是 <code>jack</code> 的类型 <code>Person</code>，而 <code>F</code> 的类型就是 <code>TS</code> 自己推导出来的 <code>foo</code> 的类型 <code>(x: number) =&gt; number[]</code>。</p>
+<h4 id="keyof"><a href="#keyof" class="headerlink" title="keyof"></a>keyof</h4><p><code>keyof</code> 可以用来取得一个对象接口的所有 <code>key</code> 值：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">    location?: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> K1 = keyof Person; <span class="comment">// "name" | "age" | "location"</span></span><br><span class="line"><span class="keyword">type</span> K2 = keyof Person[];  <span class="comment">// "length" | "push" | "pop" | "concat" | ...</span></span><br><span class="line"><span class="keyword">type</span> K3 = keyof &#123; [x: <span class="built_in">string</span>]: Person &#125;;  <span class="comment">// string | number</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p><code>in</code> 可以遍历枚举类型：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Keys = <span class="string">"a"</span> | <span class="string">"b"</span></span><br><span class="line"><span class="keyword">type</span> Obj =  &#123;</span><br><span class="line">  [p <span class="keyword">in</span> Keys]: <span class="built_in">any</span></span><br><span class="line">&#125; <span class="comment">// -&gt; &#123; a: any, b: any &#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面 <code>in</code> 遍历 <code>Keys</code>，并为每个值赋予 <code>any</code> 类型。</p>
+<h4 id="infer"><a href="#infer" class="headerlink" title="infer"></a>infer</h4><p>在条件类型语句中, 可以用 <code>infer</code> 声明一个类型变量并且对它进行使用。</p>
+<p>我们可以用它获取函数的返回类型， 源码如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ReturnType&lt;T&gt; = T <span class="keyword">extends</span> (</span><br><span class="line">  ...args: <span class="built_in">any</span>[]</span><br><span class="line">) =&gt; infer R</span><br><span class="line">  ? R</span><br><span class="line">  : <span class="built_in">any</span>;</span><br></pre></td></tr></table></figure></p>
+<p>其实这里的 <code>infer R</code> 就是声明一个变量来承载传入函数签名的返回值类型, 简单说就是用它取到函数返回值的类型方便之后使用。</p>
+<p><br></p>
+<h3 id="内置类型别名"><a href="#内置类型别名" class="headerlink" title="内置类型别名"></a>内置类型别名</h3><hr>
+<p>下面我们看一下 TS 内置的一些类型别名：<br><br></p>
+<h4 id="Partial"><a href="#Partial" class="headerlink" title="Partial"></a>Partial</h4><p><code>Partial</code> 的作用就是可以将某个类型里的属性全部变为可选项 ?。</p>
+<p>源码：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Partial&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]?: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>从源码可以看到 <code>keyof T</code> 拿到 <code>T</code> 所有属性名, 然后 <code>in</code> 进行遍历, 将值赋给 <code>P</code>, 最后 <code>T[P]</code> 取得相应属性的值.<br>结合中间的 <code>?</code>，将所有属性变为可选。</p>
+<h4 id="Required"><a href="#Required" class="headerlink" title="Required"></a>Required</h4><p><code>Required</code> 的作用刚好跟 <code>Partial</code> 相反，<code>Partial</code> 是将所有属性改成可选项，<code>Required</code> 则是将所有类型改成必选项，源码如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Required&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]-?: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>其中 <code>-?</code> 是代表移除 <code>?</code> 这个 <code>modifier</code> 的标识。<br>与之对应的还有个 <code>+?</code> , 这个含义自然与 <code>-?</code> 之前相反, 它是用来把属性变成可选项的，<code>+</code> 可省略，见 <code>Partial</code>。<br>再拓展一下，除了可以应用于 <code>?</code> 这个 <code>modifiers</code> ，还有应用在 <code>readonly</code> ，比如 <code>Readonly</code>。</p>
+<h4 id="Readonly"><a href="#Readonly" class="headerlink" title="Readonly"></a>Readonly</h4><p>这个类型的作用是将传入的属性变为只读选项。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Readonly&lt;T&gt; = &#123;</span><br><span class="line">    readonly [P <span class="keyword">in</span> keyof T]: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>给子属性添加 <code>readonly</code> 的标识，如果将上面的 <code>readonly</code> 改成 <code>-readonly</code>， 就是移除子属性的 <code>readonly</code> 标识。</p>
+<h4 id="Pick"><a href="#Pick" class="headerlink" title="Pick"></a>Pick</h4><p>这个类型则可以将某个类型中的子属性挑出来，变成包含这个类型部分属性的子类型。</p>
+<p>源码实现如下:<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> K]: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>从源码可以看到 <code>K</code> 必须是 <code>T</code> 的 <code>key</code>，然后用 <code>in</code> 进行遍历, 将值赋给 <code>P</code>, 最后 <code>T[P]</code> 取得相应属性的值。</p>
+<h4 id="Record"><a href="#Record" class="headerlink" title="Record"></a>Record</h4><p>该类型可以将 <code>K</code> 中所有的属性的值转化为 <code>T</code> 类型，源码实现如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Record&lt;K <span class="keyword">extends</span> keyof <span class="built_in">any</span>, T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> K]: T;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>可以根据 <code>K</code> 中的所有可能值来设置 <code>key</code>，以及 <code>value</code> 的类型，举个例子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T11 = Record&lt;<span class="string">'a'</span> | <span class="string">'b'</span> | <span class="string">'c'</span>, Person&gt;; <span class="comment">// -&gt; &#123; a: Person; b: Person; c: Person; &#125;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Exclude"><a href="#Exclude" class="headerlink" title="Exclude"></a>Exclude</h4><p><code>Exclude</code> 将某个类型中属于另一个的类型移除掉。</p>
+<p>源码的实现：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Exclude&lt;T, U&gt; = T <span class="keyword">extends</span> U ? never : T;</span><br></pre></td></tr></table></figure></p>
+<p>以上语句的意思就是 如果 <code>T</code> 能赋值给 <code>U</code> 类型的话，那么就会返回 <code>never</code> 类型，否则返回 <code>T</code>，最终结果是将 <code>T</code> 中的某些属于 <code>U</code> 的类型移除掉，举个例子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T00 = Exclude&lt;<span class="string">'a'</span> | <span class="string">'b'</span> | <span class="string">'c'</span> | <span class="string">'d'</span>, <span class="string">'a'</span> | <span class="string">'c'</span> | <span class="string">'f'</span>&gt;;  <span class="comment">// -&gt; 'b' | 'd'</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到 <code>T</code> 是 <code>&#39;a&#39; | &#39;b&#39; | &#39;c&#39; | &#39;d&#39;</code> ，然后 <code>U</code> 是 <code>&#39;a&#39; | &#39;c&#39; | &#39;f&#39;</code> ，返回的新类型就可以将 <code>U</code> 中的类型给移除掉，也就是 <code>&#39;b&#39; | &#39;d&#39;</code> 了。</p>
+<h4 id="Extract"><a href="#Extract" class="headerlink" title="Extract"></a>Extract</h4><p><code>Extract</code> 的作用是提取出 <code>T</code> 包含在 <code>U</code> 中的元素，换种更加贴近语义的说法就是从 <code>T</code> 中提取出 <code>U</code>，源码如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Extract&lt;T, U&gt; = T <span class="keyword">extends</span> U ? T : never;</span><br></pre></td></tr></table></figure></p>
+<p>以上语句的意思就是 如果 <code>T</code> 能赋值给 <code>U</code> 类型的话，那么就会返回 <code>T</code> 类型，否则返回 <code>never</code>，最终结果是将 <code>T</code> 和 <code>U</code> 中共有的属性提取出来，举个例子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T01 = Extract&lt;<span class="string">'a'</span> | <span class="string">'b'</span> | <span class="string">'c'</span> | <span class="string">'d'</span>, <span class="string">'a'</span> | <span class="string">'c'</span> | <span class="string">'f'</span>&gt;;  <span class="comment">// -&gt; 'a' | 'c'</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到 <code>T</code> 是 <code>&#39;a&#39; | &#39;b&#39; | &#39;c&#39; | &#39;d&#39;</code> ，然后 <code>U</code> 是 <code>&#39;a&#39; | &#39;c&#39; | &#39;f&#39;</code> ，返回的新类型就可以将 <code>T</code> 和 <code>U</code> 中共有的属性提取出来，也就是 <code>&#39;a&#39; | &#39;c&#39;</code> 了。</p>
+<h4 id="ReturnType"><a href="#ReturnType" class="headerlink" title="ReturnType"></a>ReturnType</h4><p>该类型的作用是获取函数的返回类型。</p>
+<p>源码的实现<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ReturnType&lt;T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>[]) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>[]) =&gt; infer R ? R : <span class="built_in">any</span>;</span><br></pre></td></tr></table></figure></p>
+<p>实际使用的话，就可以通过 <code>ReturnType</code> 拿到函数的返回类型，如下的示例：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x: <span class="built_in">number</span></span>): <span class="title">Array</span>&lt;<span class="title">number</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> fn = ReturnType&lt;<span class="keyword">typeof</span> foo&gt;; <span class="comment">// -&gt; number[]</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="ThisType"><a href="#ThisType" class="headerlink" title="ThisType"></a>ThisType</h4><p>这个类型是用于指定上下文对象类型的。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ThisType&lt;T&gt; &#123; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到声明中只有一个接口，没有任何的实现，说明这个类型是在 <code>TS</code> 源码层面支持的，而不是通过类型变换。</p>
+<p>这类型怎么用呢，举个例子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj: ThisType&lt;Person&gt; = &#123;</span><br><span class="line">  dosth() &#123;</span><br><span class="line">    <span class="keyword">this</span>.name <span class="comment">// string</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的话，就可以指定 <code>obj</code> 里的所有方法里的上下文对象改成 <code>Person</code> 这个类型了。</p>
+<h4 id="InstanceType"><a href="#InstanceType" class="headerlink" title="InstanceType"></a>InstanceType</h4><p>该类型的作用是获取构造函数类型的实例类型。</p>
+<p>源码实现：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> InstanceType&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>[]) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>[]) =&gt; infer R ? R : <span class="built_in">any</span>;</span><br></pre></td></tr></table></figure></p>
+<p>看一下官方的例子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> C &#123;</span><br><span class="line">    x = <span class="number">0</span>;</span><br><span class="line">    y = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> T20 = InstanceType&lt;<span class="keyword">typeof</span> C&gt;;  <span class="comment">// C</span></span><br><span class="line"><span class="keyword">type</span> T21 = InstanceType&lt;<span class="built_in">any</span>&gt;;  <span class="comment">// any</span></span><br><span class="line"><span class="keyword">type</span> T22 = InstanceType&lt;never&gt;;  <span class="comment">// any</span></span><br><span class="line"><span class="keyword">type</span> T23 = InstanceType&lt;<span class="built_in">string</span>&gt;;  <span class="comment">// Error</span></span><br><span class="line"><span class="keyword">type</span> T24 = InstanceType&lt;<span class="built_in">Function</span>&gt;;  <span class="comment">// Error</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="NonNullable"><a href="#NonNullable" class="headerlink" title="NonNullable"></a>NonNullable</h4><p>这个类型可以用来过滤类型中的 null 及 undefined 类型。</p>
+<p>源码实现：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NonNullable&lt;T&gt; = T <span class="keyword">extends</span> <span class="literal">null</span> | <span class="literal">undefined</span> ? never : T;</span><br></pre></td></tr></table></figure></p>
+<p>比如：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T22 = <span class="built_in">string</span> | <span class="built_in">number</span> | <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">type</span> T23 = NonNullable&lt;T22&gt;; <span class="comment">// -&gt; string | number;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h4><p>该类型可以获得函数的参数类型组成的元组类型。</p>
+<p>源码实现：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Parameters&lt;T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>[]) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> (...args: infer P) =&gt; <span class="built_in">any</span> ? P : never;</span><br></pre></td></tr></table></figure></p>
+<p>举个栗子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x: <span class="built_in">number</span></span>): <span class="title">Array</span>&lt;<span class="title">number</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> P = Parameters&lt;<span class="keyword">typeof</span> foo&gt;; <span class="comment">// -&gt; [number]</span></span><br></pre></td></tr></table></figure></p>
+<p>此时 <code>P</code> 的真实类型就是 <code>foo</code> 的参数组成的元组类型 <code>[number]</code>。</p>
+<h4 id="ConstructorParameters"><a href="#ConstructorParameters" class="headerlink" title="ConstructorParameters"></a>ConstructorParameters</h4><p>该类型的作用是获得类的参数类型组成的元组类型。</p>
+<p>源码：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/typescript/lib/lib.es5.d.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ConstructorParameters&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>[]) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: infer P) =&gt; <span class="built_in">any</span> ? P : never;</span><br></pre></td></tr></table></figure></p>
+<p>举个栗子：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">  <span class="keyword">private</span> firstName: <span class="built_in">string</span>;</span><br><span class="line">  <span class="keyword">private</span> lastName: <span class="built_in">string</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">firstName: <span class="built_in">string</span>, lastName: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">      <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> P = ConstructorParameters&lt;<span class="keyword">typeof</span> Person&gt;; <span class="comment">// -&gt; [string, string]</span></span><br></pre></td></tr></table></figure></p>
+<p>此时 <code>P</code> 就是 <code>Person</code> 中 <code>constructor</code> 的参数 <code>firstName</code> 和 <code>lastName</code> 的类型所组成的元组类型 <code>[string, string]</code>。</p>
+<p><br></p>
+<h3 id="自定义类型别名"><a href="#自定义类型别名" class="headerlink" title="自定义类型别名"></a>自定义类型别名</h3><hr>
+<p>下面是一些可能会经常用到，但是 TS 没有内置的一些类型别名：<br><br></p>
+<h4 id="Omit"><a href="#Omit" class="headerlink" title="Omit"></a>Omit</h4><p>有时候我们想要继承某个接口，但是又需要在新接口中将某个属性给 <code>overwrite</code> 掉，这时候通过 <code>Pick</code> 和 <code>Exclude</code> 就可以组合出来 <code>Omit</code>，用来忽略对象某些属性功能：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Omit&lt;T, K&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">type</span> Foo = Omit&lt;&#123;name: <span class="built_in">string</span>, age: <span class="built_in">number</span>&#125;, <span class="string">'name'</span>&gt; <span class="comment">// -&gt; &#123; age: number &#125;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Mutable"><a href="#Mutable" class="headerlink" title="Mutable"></a>Mutable</h4><p>将 <code>T</code> 的所有属性的 <code>readonly</code> 移除：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Mutable&lt;T&gt; = &#123;</span><br><span class="line">  -readonly [P <span class="keyword">in</span> keyof T]: T[P]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="PowerPartial"><a href="#PowerPartial" class="headerlink" title="PowerPartial"></a>PowerPartial</h4><p>内置的 <code>Partial</code> 有个局限性，就是只支持处理第一层的属性，如果是嵌套多层的就没有效果了，不过可以如下自定义：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> PowerPartial&lt;T&gt; = &#123;</span><br><span class="line">    <span class="comment">// 如果是 object，则递归类型</span></span><br><span class="line">    [U <span class="keyword">in</span> keyof T]?: T[U] <span class="keyword">extends</span> object</span><br><span class="line">      ? PowerPartial&lt;T[U]&gt;</span><br><span class="line">      : T[U]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Deferred"><a href="#Deferred" class="headerlink" title="Deferred"></a>Deferred</h4><p>相同的属性名称，但使值是一个 Promise，而不是一个具体的值：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Deferred&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]: <span class="built_in">Promise</span>&lt;T[P]&gt;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Proxify"><a href="#Proxify" class="headerlink" title="Proxify"></a>Proxify</h4><p>为 <code>T</code> 的属性添加代理<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Proxify&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]: &#123; <span class="keyword">get</span>(): T[P]; <span class="keyword">set</span>(v: T[P]): <span class="built_in">void</span> &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.tslang.cn/docs/home.html" target="_blank" rel="noopener">TypeScript中文网</a></p>
+<p><a href="https://wanghx.cn/blog/github/issue13.html" target="_blank" rel="noopener">TS 中的内置类型简述</a></p>
+<p><a href="https://www.javascriptcn.com/read-36627.html" target="_blank" rel="noopener">TypeScript 一些你可能不知道的工具泛型的使用及其实现</a><br><br></p>
+
+
+                <!-- Reproduce link -->
+                
+                    <blockquote>
+                        <p>本文转载自<a href="https://juejin.im/post/5c2f87ce5188252593122c98" target="_blank" rel="noopener">https://juejin.im/post/5c2f87ce5188252593122c98</a></p>
+                    </blockquote>
+                
+
+                <hr class="post-end">
+
+                <!-- Pager -->
+                <ul class="block-pager">
+                    <!-- 
+                    <li class="previous">
+                        <a href="/2019/12/03/github-actions/" data-toggle="tooltip" data-placement="top"
+                            title="Github Actions">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/11/18/git-submit-at-first-time/" data-toggle="tooltip" data-placement="top"
+                            title="GIT首次提交项目">Next Post &rarr;</a>
+                    </li>
+                     -->
+                    
+                    <li class="previous">
+                        <span>Prev:</span>
+                        <a href="/2019/12/03/github-actions/" title="Github Actions">
+                            Github Actions</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <span>Next:</span>
+                        <a href="/2019/11/18/git-submit-at-first-time/" title="GIT首次提交项目">
+                            GIT首次提交项目</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                
+                <!-- disqus comment end -->
+            </div>
+
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一些关键字"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">一些关键字</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#extends"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">extends</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#typeof"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">typeof</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#keyof"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">keyof</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#in"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">in</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#infer"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">infer</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#内置类型别名"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">内置类型别名</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Partial"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Partial</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Required"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Required</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Readonly"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Readonly</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Pick"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Pick</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Record"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Record</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Exclude"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">Exclude</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Extract"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">Extract</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ReturnType"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">ReturnType</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ThisType"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">ThisType</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#InstanceType"><span class="toc-nav-number">2.10.</span> <span class="toc-nav-text">InstanceType</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#NonNullable"><span class="toc-nav-number">2.11.</span> <span class="toc-nav-text">NonNullable</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Parameters"><span class="toc-nav-number">2.12.</span> <span class="toc-nav-text">Parameters</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ConstructorParameters"><span class="toc-nav-number">2.13.</span> <span class="toc-nav-text">ConstructorParameters</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#自定义类型别名"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">自定义类型别名</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Omit"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Omit</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Mutable"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Mutable</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#PowerPartial"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">PowerPartial</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Deferred"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Deferred</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Proxify"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">Proxify</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#参考"><span class="toc-nav-number"></span> <span class="toc-nav-text">参考</span></a>
+        
+        </div>
+      </aside>
+    
+
+
+            <!-- Sidebar Container -->
+            <div class="
+                    col-lg-8 col-lg-offset-2
+                    col-md-10 col-md-offset-1
+                    sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "blog-acehubert-com";
+    var disqus_identifier = "http://blog.acehubert.com/2019/12/03/typescript-type-alias/";
+    var disqus_url = "http://blog.acehubert.com/2019/12/03/typescript-type-alias/";
+
+    (function () {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'hover',
+            placement: 'left',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/acehubert007">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.instagram.com/acehubert">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/aceHubert">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hubert 2019
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    re-Ported by <a href="http://beantech.org">BeanTech</a>
+                    <br>
+                    updated by <a href="https://github.com/aceHubert/blog">Hubert</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=aceHubert&repo=blog&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if ($('#tag_cloud').length !== 0) {
+        async("http://blog.acehubert.com/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: { start: '#00afd4', end: '#0085a1' },
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-119883810-1';
+    var _gaDomain = 'blog.acehubert.com';
+
+    // Originial
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+    <!-- Image to hack wechat -->
+    <!-- <img src="http://blog.acehubert.com/img/icon_wechat.png" width="0" height="0" /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
