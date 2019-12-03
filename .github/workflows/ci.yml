@@ -1,4 +1,4 @@
-name: Build and Update Github Pages
+name: Deploy Github Pages
 
 on: 
   push:
@@ -6,7 +6,7 @@ on:
       - posts
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:

@@ -265,11 +265,16 @@ pre code {
   color: #0085a1;
   background-color: transparent;
 }
+.post-container .post-end{
+    border: 0;
+    border-top: 5pt dotted #ccc;
+    margin: 40pt auto;
+    max-width: 67pt;
+}
 .post-container .block-pager {
   margin-top: 40px;
   padding-left: 0;
 }
-
 .post-container .block-pager li {
   list-style-type: none;
 }

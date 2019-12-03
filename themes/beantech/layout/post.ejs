@@ -19,9 +19,11 @@ layout: layout
                 <!-- Reproduce link -->
                 <% if(page['reproduce']){ %>
                     <blockquote>
-                        <p>本文转载自<a href="<%= page['reproduce'] %>" target="_blank" rel="noopener">链接</a></p>
+                        <p>本文转载自<a href="<%= page['reproduce'] %>" target="_blank" rel="noopener"><%= page['reproduce'] %></a></p>
                     </blockquote>
                 <% } %>
+
+                <hr class="post-end">
 
                 <!-- Pager -->
                 <ul class="block-pager">
@@ -188,7 +190,7 @@ layout: layout
         anchors.options = {
             visible: 'hover',
             placement: 'left',
-            icon: 'ℬ'
+            icon: '#'
         };
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
