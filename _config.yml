@@ -174,5 +174,5 @@ sitemap:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/aceHubert/blog.git
+  repository: git@github.com:aceHubert/blog.git
   branch: gh-pages
