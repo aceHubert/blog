@@ -16,9 +16,16 @@ layout: layout
 
                 <%- page.content %>
 
+                <!-- Reproduce link -->
+                <% if(page['reproduce']){ %>
+                    <blockquote>
+                        <p>本文转载自<a href="<%= page['reproduce'] %>" target="_blank" rel="noopener">链接</a></p>
+                    </blockquote>
+                <% } %>
+
                 <!-- Pager -->
-                <ul class="pager">
-                    <% if (page.prev){ %>
+                <ul class="block-pager">
+                    <!-- <% if (page.prev){ %>
                     <li class="previous">
                         <a href="<%- config.root %><%- page.prev.path %>" data-toggle="tooltip" data-placement="top"
                             title="<%- page.prev.title %>">&larr; Previous Post</a>
@@ -28,6 +35,20 @@ layout: layout
                     <li class="next">
                         <a href="<%- config.root %><%- page.next.path %>" data-toggle="tooltip" data-placement="top"
                             title="<%- page.next.title %>">Next Post &rarr;</a>
+                    </li>
+                    <% } %> -->
+                    <% if (page.prev){ %>
+                    <li class="previous">
+                        <span>Prev:</span>
+                        <a href="<%- config.root %><%- page.prev.path %>" title="<%- page.prev.title %>">
+                            <%- page.prev.title %></a>
+                    </li>
+                    <% } %>
+                    <% if (page.next){ %>
+                    <li class="next">
+                        <span>Next:</span>
+                        <a href="<%- config.root %><%- page.next.path %>" title="<%- page.next.title %>">
+                            <%- page.next.title %></a>
                     </li>
                     <% } %>
                 </ul>

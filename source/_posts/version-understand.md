@@ -6,6 +6,7 @@ header-img: 'version_bg.png'
 title-color: '#fff'
 display: true 
 catalog: false
+reproduce: 'https://blog.csdn.net/linxinzheng/article/details/2201043'
 tags:
 - coding
 - nodejs
@@ -66,6 +67,3 @@ categories:
 `Deluxe`：豪华版  
 `Regged`：已注册版  
 
->
-> 本文转载自[链接](https://blog.csdn.net/linxinzheng/article/details/2201043)
->
